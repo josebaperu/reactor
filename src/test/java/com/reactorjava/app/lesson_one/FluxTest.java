@@ -14,7 +14,7 @@ public class FluxTest {
         integerFlux.subscribe(System.out::println);
 
         Flux<Integer> fromIterable = Flux.fromIterable(List.of(4,8,12,16)).log();
-        fromIterable.subscribe(System.out::println);
+        fromIterable.subscribe(sub::onNext);
 
         Flux<Integer> fromStream = Flux.fromStream(Stream.of(1,2,3,4,5,5,6).distinct());
         fromStream.subscribe(sub::onNext);
@@ -22,6 +22,6 @@ public class FluxTest {
 
 
         Flux<Integer> range = Flux.range(1,10);
-        range.subscribe(sub::onNext, null, () -> sub.onComplete());
+        range.subscribe(sub::onNext, null, sub.onCompleteRunnable);
     }
 }

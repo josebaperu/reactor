@@ -36,4 +36,5 @@ public class UtilSubscriber implements Subscriber<Object> {
     public void onComplete(){
         System.out.println("onComplete: OK");
     }
+    public Runnable onCompleteRunnable = this::onComplete;
 }

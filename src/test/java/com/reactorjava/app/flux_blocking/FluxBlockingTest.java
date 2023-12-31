@@ -1,11 +1,11 @@
 package com.reactorjava.app.flux_blocking;
 
 import com.reactorjava.app.UtilSubscriber;
-import org.junit.Test;
 import reactor.core.publisher.Flux;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.Test;
 
 public class FluxBlockingTest {
     UtilSubscriber sub = new UtilSubscriber();

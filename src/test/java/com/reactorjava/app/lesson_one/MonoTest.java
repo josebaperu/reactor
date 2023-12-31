@@ -1,5 +1,6 @@
 package com.reactorjava.app.lesson_one;
 
+import com.reactorjava.app.UtilSubscriber;
 import org.junit.Test;
 import reactor.core.publisher.Mono;
 
@@ -10,6 +11,7 @@ import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 public class MonoTest {
+    UtilSubscriber sub = new UtilSubscriber();
 
     @Test
     public void testA(){
@@ -19,17 +21,15 @@ public class MonoTest {
     }
     @Test
     public void testB(){
-        Mono<Integer> monoSuccess = Mono.just("hello").map( s -> s.length()/1).log();
-        monoSuccess.subscribe(i ->System.out.println("On Next -> " + i ), null, () -> System.out.println("on Complete"));
-        System.out.println(" ------ ");
-        Mono<Integer> monoByZero = Mono.just("hello").map( s -> s.length()/0).log();
-        monoByZero.subscribe(null, error -> System.err.println(error.getMessage()));
+        Mono<Integer> monoSuccess = Mono.just("hello").map( s -> s.length()/1);
+        monoSuccess.subscribe(sub::onNext, null, () -> sub.onComplete());
+
     }
     @Test
     public void testC(){
         Supplier<Integer> integerSupplier = () -> 1;
         Mono<Integer> monoFromSupp = Mono.fromSupplier(integerSupplier);
-        monoFromSupp.subscribe(System.out::println);
+        monoFromSupp.subscribe(sub::onNext);
 
         Mono<Integer> monoFromRunnable = Mono.fromRunnable(() -> System.out.println("hey from runnable"));
         monoFromRunnable.subscribe();

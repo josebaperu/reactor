@@ -1,16 +1,18 @@
-package com.reactorjava.app.lesson_three;
+package com.reactorjava.app.flux_blocking;
 
-import com.reactorjava.app.Util;
+import com.reactorjava.app.UtilSubscriber;
 import org.junit.Test;
 import reactor.core.publisher.Flux;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LessonThreeTest {
+public class FluxBlockingTest {
+    UtilSubscriber sub = new UtilSubscriber();
+
     @Test
     public void testOne(){
-        getNumbers(5).subscribe(System.out::println);
+        getNumbers(5).subscribe(sub::onNext);
     }
     @Test
     public void testTwo(){
@@ -29,8 +31,8 @@ public class LessonThreeTest {
         return list;
     }
     static int getNumber(){
-        Util.waitFor(1);
-        return Util.getInt();
+        UtilSubscriber.waitFor(1);
+        return UtilSubscriber.getInt();
     }
 
 }

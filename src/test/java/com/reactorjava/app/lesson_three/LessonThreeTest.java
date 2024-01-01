@@ -8,7 +8,7 @@ public class LessonThreeTest {
     UtilSubscriber sub = new UtilSubscriber();
 
     @Test
-    public void test1(){
+    public void test1() {
 
         Flux.create(fluxSink -> {
             fluxSink.next(1);

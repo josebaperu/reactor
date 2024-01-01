@@ -32,9 +32,11 @@ public class UtilSubscriber implements Subscriber<Object> {
     public void onError(Throwable o) {
         System.out.println("onError: " + o.getMessage());
     }
+
     @Override
-    public void onComplete(){
+    public void onComplete() {
         System.out.println("onComplete: OK");
     }
+
     public Runnable onCompleteRunnable = this::onComplete;
 }
